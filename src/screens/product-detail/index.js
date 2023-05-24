@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 
+import { PRODUCTS } from './../../data/products';
 import { styles } from './styles';
 
-const Products = ({ navigation }) => {
+const ProductDetail = ({ navigation, route }) => {
+  const { productId } = route.params;
+  const product = PRODUCTS.find((product) => product.id === productId);
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>PANTALLA DE DETALLE DE UN PRODUCTO</Text>
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Image resizeMode="contain" source={{ uri: product.image }} style={styles.image} />
+      <Text style={styles.name}>{product.name}</Text>
+      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.price}>$ {product.price}</Text>
+      <Button title="Volver a la categoria" onPress={() => navigation.goBack()} />
+    </View>
   );
 };
 
-export default Products;
+export default ProductDetail;

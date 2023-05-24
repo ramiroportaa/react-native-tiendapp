@@ -22,11 +22,15 @@ const ShopNavigator = () => {
         component={Categories}
         options={{ title: 'Categorías de productos' }}
       />
-      <Stack.Screen name="Products" component={Products} options={{ title: 'Categoria X' }} />
+      <Stack.Screen
+        name="Products"
+        component={Products}
+        options={({ route }) => ({ title: route.params.categoryName })}
+      />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetail}
-        options={{ title: 'Detalle de prod X' }}
+        options={({ route }) => ({ title: route.params.productName })}
       />
     </Stack.Navigator>
   );

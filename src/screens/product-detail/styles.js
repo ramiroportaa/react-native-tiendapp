@@ -2,26 +2,31 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import { theme } from '../../constants/theme';
 
-const { height, width } = Dimensions.get('screen');
+const { height } = Dimensions.get('screen');
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
     alignItems: 'center',
+    backgroundColor: theme.colors.background,
   },
-  title: {
+  name: {
     fontFamily: theme.fonts.fontFamily.bold,
-    fontSize: theme.fonts.fontSize.title,
-    color: theme.colors.text,
-    textAlign: 'center',
+    fontSize: 18,
     paddingVertical: 20,
   },
-  label: {
+  description: {
+    fontSize: 14,
     fontFamily: theme.fonts.fontFamily.regular,
-    fontSize: theme.fonts.fontSize.text,
-    color: theme.colors.text,
+    paddingVertical: 10,
+  },
+  price: {
+    fontSize: 18,
+    fontFamily: theme.fonts.fontFamily.bold,
     paddingVertical: 20,
-    textAlign: 'center',
+  },
+  image: {
+    width: '100%',
+    height: height * 0.3,
   },
 });

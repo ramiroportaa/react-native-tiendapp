@@ -48,7 +48,7 @@ export const PRODUCTS = [
     category: 3,
     name: 'SB Dunk yellow bear x Grateful dead',
     price: 137000,
-    description: 'Pan de Yema de trigo de masa madre',
+    description: 'Calzado exclusivo de Nike',
     image:
       'https://www.kicksonfire.com/wp-content/uploads/2020/06/Grateful-Dead-x-Nike-SB-Dunk-Low-Yellow-Bear-3.jpeg?x27993',
   },

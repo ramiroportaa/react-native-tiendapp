@@ -1,21 +1,25 @@
-import { useState } from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 
-import { styles } from './styles';
-import { theme } from '../../constants/theme';
+import { ProductItem } from './../../components';
+import { PRODUCTS } from './../../data/products';
 
-const Products = ({ navigation }) => {
-  const handlerOnPress = (product) => {
-    navigation.navigate('ProductDetail', { product: product.id });
+const Products = ({ route, navigation }) => {
+  const { categoryId, categoryColor } = route.params;
+  const products = PRODUCTS.filter((product) => product.category === categoryId);
+
+  const handlerSelected = (item) => {
+    navigation.navigate('ProductDetail', {
+      productId: item.id,
+      productName: item.name,
+    });
   };
 
+  const renderItem = ({ item }) => (
+    <ProductItem item={item} onSelected={handlerSelected} color={categoryColor} />
+  );
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>PANTALLA DE PRODUCTOS DE X CATEGORIA</Text>
-        <Button title="Ver DETALLE" color={theme.colors.green} onPress={handlerOnPress} />
-      </View>
-    </ScrollView>
+    <FlatList data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />
   );
 };
 

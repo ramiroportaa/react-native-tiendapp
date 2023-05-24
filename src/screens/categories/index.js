@@ -1,21 +1,26 @@
-import { useState } from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 
-import { styles } from './styles';
-import { theme } from '../../constants/theme';
+import { CATEGORIES } from './../../data/categories';
+import { CategoryItem } from '../../components';
 
 const Categories = ({ navigation }) => {
-  const handlerOnPress = (category) => {
-    navigation.navigate('Products', { category: category.id });
+  const onSelected = (item) => {
+    navigation.navigate('Products', {
+      categoryId: item.id,
+      categoryName: item.name,
+      categoryColor: item.color,
+    });
   };
 
+  const renderItem = ({ item }) => <CategoryItem category={item} onSelected={onSelected} />;
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>PANTALLA DE CATEGORIAS</Text>
-        <Button title="Ver productos" color={theme.colors.green} onPress={handlerOnPress} />
-      </View>
-    </ScrollView>
+    <FlatList
+      data={CATEGORIES}
+      keyExtractor={(category) => category.id}
+      renderItem={renderItem}
+      numColumns={1}
+    />
   );
 };
 
