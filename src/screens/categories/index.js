@@ -14,14 +14,7 @@ const Categories = ({ navigation }) => {
 
   const renderItem = ({ item }) => <CategoryItem category={item} onSelected={onSelected} />;
 
-  return (
-    <FlatList
-      data={CATEGORIES}
-      keyExtractor={(category) => category.id}
-      renderItem={renderItem}
-      numColumns={1}
-    />
-  );
+  return <FlatList data={CATEGORIES} keyExtractor={(category) => category.id} renderItem={renderItem} numColumns={2} />;
 };
 
 export default Categories;

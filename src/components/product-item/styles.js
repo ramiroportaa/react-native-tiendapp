@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
   },
   containerTouchable: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: theme.colors.primary,
     shadowColor: '#000',
     shadowOffset: {
@@ -21,19 +22,34 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  imageContainer: {
+    width: '30%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.colors.white,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  textContainer: {
+    alignItems: 'flex-start',
+    textAlign: 'right',
     padding: 10,
+    width: '70%',
   },
   name: {
     fontSize: theme.fonts.fontSize.title,
     fontFamily: theme.fonts.fontFamily.regular,
-    textAlign: 'center',
+    paddingBottom: 5,
   },
   price: {
     fontSize: theme.fonts.fontSize.text,
     fontFamily: theme.fonts.fontFamily.bold,
-    paddingBottom: 5,
-    textAlign: 'center',
+    alignSelf: 'flex-end',
   },
 });

@@ -25,8 +25,13 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.fontFamily.bold,
     paddingVertical: 20,
   },
-  image: {
+  imageContainer: {
     width: '100%',
     height: height * 0.3,
+    backgroundColor: theme.colors.white,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
