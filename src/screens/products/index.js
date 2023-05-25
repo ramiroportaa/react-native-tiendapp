@@ -14,13 +14,9 @@ const Products = ({ route, navigation }) => {
     });
   };
 
-  const renderItem = ({ item }) => (
-    <ProductItem item={item} onSelected={handlerSelected} color={categoryColor} />
-  );
+  const renderItem = ({ item }) => <ProductItem item={item} onSelected={handlerSelected} color={categoryColor} />;
 
-  return (
-    <FlatList data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />
-  );
+  return <FlatList data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />;
 };
 
 export default Products;
