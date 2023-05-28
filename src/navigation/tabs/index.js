@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CartNavigator from './../cart';
 import OrdersNavigator from './../orders';
 import ShopNavigator from './../shop';
+import { styles } from './styles';
 import { theme } from '../../constants/theme';
 
 const Tab = createBottomTabNavigator();
@@ -18,11 +19,13 @@ const TabNavigator = () => {
           fontFamily: theme.fonts.fontFamily.regular,
           fontSize: 12,
         },
-        tabBarStyle: { backgroundColor: theme.colors.background },
         tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.secondary,
+        tabBarInactiveTintColor: theme.colors.background,
         tabBarIconStyle: {
           fontSize: theme.fonts.fontSize.title,
+        },
+        tabBarStyle: {
+          ...styles.tabBar,
         },
       }}>
       <Tab.Screen

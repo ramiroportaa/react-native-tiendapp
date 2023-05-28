@@ -10,28 +10,16 @@ const ShopNavigator = () => {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        contentStyle: { backgroundColor: theme.colors.background },
+        contentStyle: { backgroundColor: theme.colors.background, paddingBottom: 70 },
         headerStyle: { backgroundColor: theme.colors.primary },
         headerTintColor: theme.colors.background,
         headerTitleStyle: {
           fontFamily: theme.fonts.fontFamily.bold,
         },
       }}>
-      <Stack.Screen
-        name="Home"
-        component={Categories}
-        options={{ title: 'Categorías de productos' }}
-      />
-      <Stack.Screen
-        name="Products"
-        component={Products}
-        options={({ route }) => ({ title: route.params.categoryName })}
-      />
-      <Stack.Screen
-        name="ProductDetail"
-        component={ProductDetail}
-        options={({ route }) => ({ title: route.params.productName })}
-      />
+      <Stack.Screen name="Home" component={Categories} options={{ title: 'Categorías de productos' }} />
+      <Stack.Screen name="Products" component={Products} options={({ route }) => ({ title: route.params.categoryName })} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} options={({ route }) => ({ title: route.params.productName })} />
     </Stack.Navigator>
   );
 };

@@ -10,6 +10,7 @@ const OrdersNavigator = () => {
     <Stack.Navigator
       initialRouteName="Orders"
       screenOptions={{
+        contentStyle: { backgroundColor: theme.colors.background, paddingBottom: 70 },
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },

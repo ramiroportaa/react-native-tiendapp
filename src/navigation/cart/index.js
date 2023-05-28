@@ -9,7 +9,7 @@ const CartNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        contentStyle: { backgroundColor: theme.colors.background },
+        contentStyle: { backgroundColor: theme.colors.white, paddingBottom: 70 },
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
