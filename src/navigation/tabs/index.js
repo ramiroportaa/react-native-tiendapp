@@ -1,8 +1,5 @@
-import { Entypo } from '@expo/vector-icons';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useRef, useEffect } from 'react';
-import { Animated, View, Text } from 'react-native';
 
 import CartNavigator from './../cart';
 import OrdersNavigator from './../orders';
@@ -12,18 +9,6 @@ import { theme } from '../../constants/theme';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
-  const tabIconAnimation = () => {
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  useEffect(() => {
-    tabIconAnimation();
-  }, [tabIconAnimation]);
   return (
     <Tab.Navigator
       initialRouteName="ShopTab"
@@ -45,11 +30,7 @@ const TabNavigator = () => {
         component={ShopNavigator}
         options={{
           tabBarLabel: 'Shop',
-          tabBarIcon: ({ color, size }) => (
-            <Animated.View style={{ opacity: animatedValue }}>
-              <Entypo name="shop" size={size} color={color} />
-            </Animated.View>
-          ),
+          tabBarIcon: ({ color, size }) => <Entypo name="shop" size={size} color={color} />,
         }}
       />
       <Tab.Screen
