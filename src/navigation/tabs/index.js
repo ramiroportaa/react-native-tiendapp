@@ -1,3 +1,4 @@
+import { Entypo } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRef, useEffect } from 'react';
@@ -33,10 +34,10 @@ const TabNavigator = () => {
           fontSize: 12,
         },
         tabBarStyle: { backgroundColor: theme.colors.background },
-        tabBarActiveTintColor: theme.colors.text,
-        tabBarInactiveTintColor: theme.colors.black,
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.secondary,
         tabBarIconStyle: {
-          fontSize: 22,
+          fontSize: theme.fonts.fontSize.title,
         },
       }}>
       <Tab.Screen
@@ -44,9 +45,9 @@ const TabNavigator = () => {
         component={ShopNavigator}
         options={{
           tabBarLabel: 'Shop',
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ color, size }) => (
             <Animated.View style={{ opacity: animatedValue }}>
-              <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
+              <Entypo name="shop" size={size} color={color} />
             </Animated.View>
           ),
         }}
@@ -56,7 +57,7 @@ const TabNavigator = () => {
         component={CartNavigator}
         options={{
           tabBarLabel: 'Cart',
-          tabBarIcon: ({ focused, color, size }) => <Ionicons name={focused ? 'cart' : 'cart-outline'} size={size} color={color} />,
+          tabBarIcon: ({ focused, color, size }) => <Ionicons name={focused ? 'cart' : 'cart-outline'} size={size + 7} color={color} />,
         }}
       />
       <Tab.Screen
@@ -64,7 +65,7 @@ const TabNavigator = () => {
         component={OrdersNavigator}
         options={{
           tabBarLabel: 'Orders',
-          tabBarIcon: ({ focused, color, size }) => <Ionicons name={focused ? 'file-tray' : 'file-tray-outline'} size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <Entypo name="shopping-bag" size={size} color={color} />,
         }}
       />
     </Tab.Navigator>

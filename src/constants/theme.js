@@ -1,23 +1,23 @@
 export const theme = {
-    colors: {
-      black: '#02020A',
-      white: '#FFF',
-      red: '#cc0000',
-      green: '#BBE2B9',
-      primary: '#B497D6',
-      secondary: '#05204A',
-      background: '#E1E2EF',
-      text: '#02020A',
+  colors: {
+    black: '#02020A',
+    white: '#FFF',
+    red: '#E83B3D',
+    green: '#0FA3B1',
+    primary: '#613C41',
+    secondary: '#9EA3AA',
+    background: '#e9e6ea',
+    text: '#02020A',
+  },
+  fonts: {
+    fontFamily: {
+      bold: 'Epilogue-Bold',
+      regular: 'Epilogue-Regular',
     },
-    fonts: {
-      fontFamily: {
-        bold: 'Epilogue-Bold',
-        regular: 'Epilogue-Regular',
-      },
-      fontSize: {
-        title: 20,
-        text: 16,
-        bigNumber: 32,
-      },
+    fontSize: {
+      title: 20,
+      text: 16,
+      bigNumber: 32,
     },
-  };
+  },
+};

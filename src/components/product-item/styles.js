@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   containerTouchable: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.white,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -31,6 +31,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.colors.white,
+    borderRightColor: theme.colors.background,
+    borderRightWidth: 3,
   },
   image: {
     width: '100%',

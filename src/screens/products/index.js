@@ -4,7 +4,7 @@ import { ProductItem } from './../../components';
 import { PRODUCTS } from './../../data/products';
 
 const Products = ({ route, navigation }) => {
-  const { categoryId, categoryColor } = route.params;
+  const { categoryId } = route.params;
   const products = PRODUCTS.filter((product) => product.category === categoryId);
 
   const handlerSelected = (item) => {
@@ -14,7 +14,7 @@ const Products = ({ route, navigation }) => {
     });
   };
 
-  const renderItem = ({ item }) => <ProductItem item={item} onSelected={handlerSelected} color={categoryColor} />;
+  const renderItem = ({ item }) => <ProductItem item={item} onSelected={handlerSelected} />;
 
   return <FlatList data={products} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />;
 };
