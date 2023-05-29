@@ -1,10 +1,15 @@
 import { View, Text, Image, Button } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { addProductById } from './../../store/actions';
 import { styles } from './styles';
 
 const ProductDetail = ({ navigation }) => {
+  const dispatch = useDispatch();
   const product = useSelector((state) => state.products.selected);
+  const handlerAgregar = () => {
+    dispatch(addProductById(product.id));
+  };
 
   return (
     <View style={styles.container}>
@@ -14,6 +19,7 @@ const ProductDetail = ({ navigation }) => {
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.description}>{product.description}</Text>
       <Text style={styles.price}>$ {product.price}</Text>
+      <Button title="Agregar" color="green" onPress={handlerAgregar} />
       <Button title="Volver a la categoría" onPress={() => navigation.goBack()} />
     </View>
   );
