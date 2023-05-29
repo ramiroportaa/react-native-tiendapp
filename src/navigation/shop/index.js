@@ -10,7 +10,7 @@ const ShopNavigator = () => {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        contentStyle: { backgroundColor: theme.colors.background, paddingBottom: 70 },
+        contentStyle: { backgroundColor: theme.colors.background, paddingBottom: 75 },
         headerStyle: { backgroundColor: theme.colors.primary },
         headerTintColor: theme.colors.background,
         headerTitleStyle: {

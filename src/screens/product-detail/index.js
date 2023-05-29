@@ -1,11 +1,10 @@
 import { View, Text, Image, Button } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { PRODUCTS } from './../../data/products';
 import { styles } from './styles';
 
-const ProductDetail = ({ navigation, route }) => {
-  const { productId } = route.params;
-  const product = PRODUCTS.find((product) => product.id === productId);
+const ProductDetail = ({ navigation }) => {
+  const product = useSelector((state) => state.products.selected);
 
   return (
     <View style={styles.container}>
@@ -15,7 +14,7 @@ const ProductDetail = ({ navigation, route }) => {
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.description}>{product.description}</Text>
       <Text style={styles.price}>$ {product.price}</Text>
-      <Button title="Volver a la categoria" onPress={() => navigation.goBack()} />
+      <Button title="Volver a la categoría" onPress={() => navigation.goBack()} />
     </View>
   );
 };
