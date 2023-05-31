@@ -86,7 +86,7 @@ const cartReducer = (state = initialState, action) => {
       const cart = addProductById(action.productId, state.data);
       return {
         ...state,
-        data: cart,
+        data: [...cart],
         total: sumarTotal(cart),
       };
     }

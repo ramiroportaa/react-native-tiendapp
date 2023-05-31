@@ -23,7 +23,7 @@ const Cart = ({ navigation }) => {
     <View style={styles.container}>
       <FlatList data={cart} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} style={styles.listContainer} />
       <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.buttonConfirm} onPress={handlerConfirm}>
+        <TouchableOpacity disabled={cart.length === 0} style={styles.buttonConfirm} onPress={handlerConfirm}>
           <Text style={styles.buttonConfirmText}>Confirmar</Text>
           <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total:</Text>
