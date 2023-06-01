@@ -1,11 +1,11 @@
-import { FlatList, View, Text, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { CartItem } from './../../components';
 import { deleteProductById, confirmOrder } from './../../store/actions';
 import { styles } from './styles';
 
-const Cart = ({ navigation }) => {
+const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.data);
   const total = useSelector((state) => state.cart.total);
@@ -14,7 +14,6 @@ const Cart = ({ navigation }) => {
   };
   const handlerConfirm = () => {
     dispatch(confirmOrder(cart, total));
-    navigation.navigate('OrdersTab');
   };
 
   const renderItem = ({ item }) => <CartItem item={item} onRemove={handlerRemove} />;

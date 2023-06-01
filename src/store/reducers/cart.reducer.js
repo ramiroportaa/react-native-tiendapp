@@ -20,12 +20,10 @@ function addProductById(idProd, cart) {
       }
       return product;
     });
-    console.warn('Producto agregado correctamente');
     return updatedCart;
   } else {
     const product = PRODUCTS.find((product) => product.id === idProd);
     cart.push({ ...product, quantity: 1 });
-    console.warn('Producto agregado correctamente');
     return cart;
   }
 }
@@ -63,8 +61,8 @@ const cartReducer = (state = initialState, action) => {
     case CONFIRM_ORDER: {
       return {
         ...state,
-        data: [],
-        total: 0,
+        data: action.isConfirm ? [] : state.data,
+        total: action.isConfirm ? 0 : state.total,
       };
     }
     default:
