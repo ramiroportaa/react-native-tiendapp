@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useEffect } from 'react';
 import { View, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -13,6 +14,12 @@ const Orders = () => {
   useEffect(() => {
     dispatch(getOrders());
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getOrders());
+    }, [dispatch])
+  );
 
   const keyExtractor = (item) => item.id.toString();
   const onRemove = (id) => {
