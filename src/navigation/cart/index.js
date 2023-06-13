@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { theme } from '../../constants/theme';
-import { Cart, Checkout } from '../../screens';
+import { Cart, Checkout, Maps } from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +21,7 @@ const CartNavigator = () => {
       }}>
       <Stack.Screen name="Cart" component={Cart} options={{ title: 'Carrito' }} />
       <Stack.Screen name="Checkout" component={Checkout} options={{ title: 'Checkout' }} />
+      <Stack.Screen name="Maps" component={Maps} options={{ title: 'Mapa' }} />
     </Stack.Navigator>
   );
 };
