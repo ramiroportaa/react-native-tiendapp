@@ -14,12 +14,13 @@ export const deleteProductById = (id) => ({
   productId: id,
 });
 
-export const confirmOrder = (cart, total) => {
+export const confirmOrder = (cart, total, coords) => {
   return async (dispatch) => {
     const body = {
       date: Date.now(),
       total,
       items: cart,
+      coords,
     };
 
     try {

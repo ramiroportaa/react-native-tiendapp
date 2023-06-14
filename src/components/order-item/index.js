@@ -14,6 +14,9 @@ const OrderItem = ({ item, onRemove }) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.date}>{formatDate(item.date)}</Text>
+        {/* <Text style={styles.date}>
+          Coords: {item.coords?.lat}, {item.coords?.lng}
+        </Text> */}
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.body}>

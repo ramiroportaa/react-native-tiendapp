@@ -6,7 +6,7 @@ import { confirmOrder } from './../../store/actions';
 import { styles } from './styles';
 import { LocationSelector } from '../../components';
 
-const Checkout = () => {
+const Checkout = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.data);
   const total = useSelector((state) => state.cart.total);
@@ -14,7 +14,8 @@ const Checkout = () => {
   const [coords, setCoords] = useState(null);
 
   const handlerConfirm = () => {
-    dispatch(confirmOrder(cart, total));
+    dispatch(confirmOrder(cart, total, coords));
+    navigation.navigate('Orders');
   };
 
   const onLocation = (location) => {
@@ -26,7 +27,7 @@ const Checkout = () => {
       <Text>Seleccione la ubicación donde se entregara el pedido:</Text>
       <LocationSelector onLocation={onLocation} />
       <View style={styles.footerContainer}>
-        <TouchableOpacity disabled={coords == null} style={styles.buttonConfirm} onPress={handlerConfirm}>
+        <TouchableOpacity disabled={coords == null || !cart.length} style={styles.buttonConfirm} onPress={handlerConfirm}>
           <Text style={styles.buttonConfirmText}>Confirmar</Text>
           <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total:</Text>
