@@ -1,32 +1,27 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 import { styles } from './styles';
-import { theme } from '../../constants/theme';
 
 const formatDate = (time) => {
   const date = new Date(time);
   return date.toLocaleDateString();
 };
 
-const OrderItem = ({ item, onRemove }) => {
+const OrderItem = ({ item, onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => onPress(item.id)}>
       <View style={styles.headerContainer}>
-        <Text style={styles.date}>{formatDate(item.date)}</Text>
-        {/* <Text style={styles.date}>
-          Coords: {item.coords?.lat}, {item.coords?.lng}
-        </Text> */}
+        <Text style={styles.date}>
+          {formatDate(item.date)} || #{item.id}
+        </Text>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.body}>
-          <Text style={styles.total}>$ {item.total}</Text>
+          <Text style={styles.total}>Total: $ {item.total}</Text>
         </View>
-        <TouchableOpacity onPress={() => onRemove(item.id)}>
-          <Ionicons name="trash" size={22} color={theme.colors.red} />
-        </TouchableOpacity>
+        <Text>Ver mas...</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

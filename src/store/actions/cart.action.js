@@ -1,7 +1,9 @@
 import { Alert } from 'react-native';
 
 import { FIREBASE_REALTIME_DB_URL } from './../../constants/firebase';
+import { MAPS_API_KEY } from '../../utils/maps';
 import { cartTypes } from '../types';
+
 const { ADD_TO_CART, REMOVE_FROM_CART, CONFIRM_ORDER } = cartTypes;
 
 export const addProductById = (id) => ({
@@ -16,11 +18,23 @@ export const deleteProductById = (id) => ({
 
 export const confirmOrder = (cart, total, coords) => {
   return async (dispatch) => {
+    let address;
+    try {
+      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${MAPS_API_KEY}`);
+      if (!res.ok) throw new Error('No se pudo comunicar con la API de Google Maps');
+      const resData = await res.json();
+      if (!resData.results) throw new Error('No se han encontrado datos para los coordenadas seleccionadas');
+      address = resData.results[0].formatted_address;
+    } catch (error) {
+      console.log(`Error al obtener dirección del usuario - ${error}`);
+    }
+
     const body = {
       date: Date.now(),
       total,
       items: cart,
       coords,
+      address,
     };
 
     try {

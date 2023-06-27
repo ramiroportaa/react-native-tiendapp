@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   date: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: theme.fonts.fontFamily.regular,
     color: theme.colors.text,
   },

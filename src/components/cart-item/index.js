@@ -17,9 +17,13 @@ const CartItem = ({ item, onRemove }) => {
             $ {item.price * item.quantity} ({item.price} c/u)
           </Text>
         </View>
-        <TouchableOpacity onPress={() => onRemove(item.id)}>
-          <Ionicons name="trash" size={22} color={theme.colors.red} />
-        </TouchableOpacity>
+        {onRemove ? (
+          <TouchableOpacity onPress={() => onRemove(item.id)}>
+            <Ionicons name="trash" size={22} color={theme.colors.red} />
+          </TouchableOpacity>
+        ) : (
+          ''
+        )}
       </View>
     </View>
   );

@@ -1,15 +1,28 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useEffect } from 'react';
-import { View, FlatList } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { View, FlatList, Modal } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
-import { OrderItem } from '../../components';
+import { OrderItem, ModalItem } from '../../components';
 import { deleteOrderById, getOrders } from '../../store/actions';
 
 const Orders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.data);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const onCancel = () => {
+    setModalVisible(false);
+    setSelectedItem(null);
+  };
+
+  const onHandlerModal = (id) => {
+    setModalVisible(true);
+    const order = orders.find((item) => item.id === id);
+    setSelectedItem(order);
+  };
 
   useEffect(() => {
     dispatch(getOrders());
@@ -24,11 +37,15 @@ const Orders = () => {
   const keyExtractor = (item) => item.id.toString();
   const onRemove = (id) => {
     dispatch(deleteOrderById(id));
+    onCancel();
   };
-  const renderItem = ({ item }) => <OrderItem item={item} onRemove={onRemove} />;
+  const renderItem = ({ item }) => <OrderItem item={item} onPress={onHandlerModal} />;
   return (
     <View style={styles.container}>
       <FlatList data={orders} keyExtractor={keyExtractor} renderItem={renderItem} />
+      <Modal visible={modalVisible} animationType="slide" onRequestClose={onCancel}>
+        <ModalItem onCancel={onCancel} onDelete={onRemove} selectedItem={selectedItem} />
+      </Modal>
     </View>
   );
 };
