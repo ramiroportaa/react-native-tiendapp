@@ -1,14 +1,17 @@
 import { View, Text, Image, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addProductById } from './../../store/actions';
+import { addProduct } from './../../store/actions';
 import { styles } from './styles';
 
 const ProductDetail = ({ navigation }) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.selected);
+  const userId = useSelector((state) => state.auth.userId);
+  const cart = useSelector((state) => state.cart.data);
+
   const handlerAgregar = () => {
-    dispatch(addProductById(product.id));
+    dispatch(addProduct(product.id, cart, userId));
   };
 
   return (

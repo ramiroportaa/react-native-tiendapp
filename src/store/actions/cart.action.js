@@ -1,20 +1,84 @@
 import { Alert } from 'react-native';
 
 import { FIREBASE_REALTIME_DB_URL } from './../../constants/firebase';
+import { PRODUCTS } from '../../data/products';
+import { updateItemsInCart, selectCart } from '../../db';
 import { MAPS_API_KEY } from '../../utils/maps';
 import { cartTypes } from '../types';
 
-const { ADD_TO_CART, REMOVE_FROM_CART, CONFIRM_ORDER } = cartTypes;
+const { LOAD_CART, ADD_TO_CART, REMOVE_FROM_CART, CONFIRM_ORDER } = cartTypes;
 
-export const addProductById = (id) => ({
-  type: ADD_TO_CART,
-  productId: id,
-});
+// Función para agregar un producto por ID al array y devuelve un nuevo carrito.
+function addProductById(idProd, cart) {
+  const productInCart = cart.find((product) => product.id === idProd);
+  if (productInCart) {
+    const updatedCart = cart.map((product) => {
+      if (product.id === idProd) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+    return updatedCart;
+  } else {
+    const product = PRODUCTS.find((product) => product.id === idProd);
+    cart.push({ ...product, quantity: 1 });
+    return cart;
+  }
+}
 
-export const deleteProductById = (id) => ({
-  type: REMOVE_FROM_CART,
-  productId: id,
-});
+// Función para eliminar un producto por ID del array y devuelve un nuevo carrito.
+function deleteProductById(idProd, cart) {
+  const updatedCart = cart.filter((product) => product.id !== idProd);
+  console.warn('Producto eliminado correctamente');
+  return updatedCart;
+}
+
+export const addProduct = (idProd, cart, userId) => {
+  return async (dispatch) => {
+    try {
+      const items = addProductById(idProd, cart);
+      await updateItemsInCart(userId, items);
+
+      dispatch({
+        type: ADD_TO_CART,
+        items,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteProduct = (idProd, cart, userId) => {
+  return async (dispatch) => {
+    try {
+      const items = deleteProductById(idProd, cart);
+      await updateItemsInCart(userId, items);
+
+      dispatch({
+        type: REMOVE_FROM_CART,
+        items,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getCart = (userId) => {
+  return async (dispatch) => {
+    try {
+      const result = await selectCart(userId);
+      const items = JSON.parse(result?.rows?._array[0]?.items) || [];
+      dispatch({
+        type: LOAD_CART,
+        items,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const confirmOrder = (cart, total, coords) => {
   return async (dispatch) => {

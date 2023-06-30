@@ -1,20 +1,26 @@
+import { useEffect } from 'react';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { CartItem } from './../../components';
-import { deleteProductById } from './../../store/actions';
+import { deleteProduct, getCart } from './../../store/actions';
 import { styles } from './styles';
 
 const Cart = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.data);
   const total = useSelector((state) => state.cart.total);
+  const userId = useSelector((state) => state.auth.userId);
   const handlerRemove = (id) => {
-    dispatch(deleteProductById(id));
+    dispatch(deleteProduct(id, cart, userId));
   };
   const handlerCheckout = () => {
     navigation.navigate('Checkout');
   };
+
+  useEffect(() => {
+    dispatch(getCart(userId));
+  }, [dispatch]);
 
   const renderItem = ({ item }) => <CartItem item={item} onRemove={handlerRemove} />;
 
