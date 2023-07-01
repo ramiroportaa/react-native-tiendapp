@@ -3,12 +3,12 @@ import { FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ProductItem } from './../../components';
-import { selectProduct, filterProducts } from './../../store/actions';
+import { selectProduct, getProducts } from './../../store/actions';
 
 const Products = ({ navigation }) => {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.categories.selected.id);
-  const products = useSelector((state) => state.products.filteredProducts);
+  const products = useSelector((state) => state.products.data);
 
   const handlerSelected = (item) => {
     dispatch(selectProduct(item.id));
@@ -18,7 +18,7 @@ const Products = ({ navigation }) => {
   };
 
   useEffect(() => {
-    dispatch(filterProducts(categoryId));
+    dispatch(getProducts(categoryId));
   }, []);
 
   const renderItem = ({ item }) => <ProductItem item={item} onSelected={handlerSelected} />;
