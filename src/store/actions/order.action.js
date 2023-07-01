@@ -2,10 +2,10 @@ import { FIREBASE_REALTIME_DB_URL } from './../../constants/firebase';
 import { orderTypes } from '../types';
 const { GET_ORDERS, DELETE_ORDER } = orderTypes;
 
-export const getOrders = () => {
+export const getOrders = (userId) => {
   return async (dispatch) => {
     try {
-      const res = await fetch(`${FIREBASE_REALTIME_DB_URL}/orders.json`, {
+      const res = await fetch(`${FIREBASE_REALTIME_DB_URL}/orders.json?orderBy="userId"&equalTo="${userId}"`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -10,11 +10,12 @@ const Checkout = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.data);
   const total = useSelector((state) => state.cart.total);
+  const userId = useSelector((state) => state.auth.userId);
 
   const [coords, setCoords] = useState(null);
 
   const handlerConfirm = () => {
-    dispatch(confirmOrder(cart, total, coords));
+    dispatch(confirmOrder(cart, total, coords, userId));
     navigation.navigate('Orders');
   };
 

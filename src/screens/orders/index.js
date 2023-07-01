@@ -10,6 +10,7 @@ import { deleteOrderById, getOrders } from '../../store/actions';
 const Orders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.data);
+  const userId = useSelector((state) => state.auth.userId);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -25,12 +26,12 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    dispatch(getOrders());
+    dispatch(getOrders(userId));
   }, []);
 
   useFocusEffect(
     useCallback(() => {
-      dispatch(getOrders());
+      dispatch(getOrders(userId));
     }, [dispatch])
   );
 

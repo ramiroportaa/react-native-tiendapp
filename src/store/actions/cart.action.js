@@ -80,7 +80,7 @@ export const getCart = (userId) => {
   };
 };
 
-export const confirmOrder = (cart, total, coords) => {
+export const confirmOrder = (cart, total, coords, userId) => {
   return async (dispatch) => {
     let address;
     try {
@@ -99,6 +99,7 @@ export const confirmOrder = (cart, total, coords) => {
       items: cart,
       coords,
       address,
+      userId,
     };
 
     try {
