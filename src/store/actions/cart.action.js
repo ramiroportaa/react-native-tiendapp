@@ -1,7 +1,6 @@
 import { Alert } from 'react-native';
 
 import { FIREBASE_REALTIME_DB_URL } from './../../constants/firebase';
-import { PRODUCTS } from '../../data/products';
 import { updateItemsInCart, selectCart } from '../../db';
 import { MAPS_API_KEY } from '../../utils/maps';
 import { cartTypes } from '../types';
@@ -9,7 +8,7 @@ import { cartTypes } from '../types';
 const { LOAD_CART, ADD_TO_CART, REMOVE_FROM_CART, CONFIRM_ORDER } = cartTypes;
 
 // Función para agregar un producto por ID al array y devuelve un nuevo carrito.
-function addProductById(idProd, cart) {
+async function addProductById(idProd, cart) {
   const productInCart = cart.find((product) => product.id === idProd);
   if (productInCart) {
     const updatedCart = cart.map((product) => {
@@ -20,7 +19,19 @@ function addProductById(idProd, cart) {
     });
     return updatedCart;
   } else {
-    const product = PRODUCTS.find((product) => product.id === idProd);
+    let product;
+    try {
+      const res = await fetch(`${FIREBASE_REALTIME_DB_URL}/products/${idProd}.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = await res.json();
+      product = { ...json, id: idProd };
+    } catch (error) {
+      console.log(error);
+    }
     cart.push({ ...product, quantity: 1 });
     return cart;
   }
@@ -36,7 +47,7 @@ function deleteProductById(idProd, cart) {
 export const addProduct = (idProd, cart, userId) => {
   return async (dispatch) => {
     try {
-      const items = addProductById(idProd, cart);
+      const items = await addProductById(idProd, cart);
       await updateItemsInCart(userId, items);
 
       dispatch({

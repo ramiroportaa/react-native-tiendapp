@@ -16,7 +16,7 @@ const Checkout = ({ navigation }) => {
 
   const handlerConfirm = () => {
     dispatch(confirmOrder(cart, total, coords, userId));
-    navigation.navigate('Orders');
+    navigation.navigate('OrdersTab');
   };
 
   const onLocation = (location) => {
